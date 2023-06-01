@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">expenseManager</string>
+    <string name="cost_string">Стоимость</string>
+    <string name="name_string">Наименование</string>
+    <string name="choose_date_string">Выберите дату</string>
+    <string name="choose_category_string">Категория</string>
+    <string name="add_string">Добавить</string>
+    <string name="exspense_string">Расход</string>
+</resources>

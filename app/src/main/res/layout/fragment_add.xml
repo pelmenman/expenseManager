@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/edit_text_cost"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_max="488dp"
+        android:textColorHighlight="@color/light_blue"
+        android:textCursorDrawable="@drawable/cursor_light_blue"
+        android:cursorVisible="false"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.09"
+        android:hint="@string/cost_string"
+        android:textSize="18sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/grey"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:inputType="number"
+        android:maxLength="13"
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/space"
+        android:background="@drawable/menu_bar"
+        android:elevation="4dp"
+        android:autofillHints="none"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.57"/>
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_cost"
+        app:layout_constraintBottom_toTopOf="@id/panel"
+        />
+    
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/panel"
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       app:layout_constraintHeight_default="percent"
+       app:layout_constraintHeight_percent="0.09"
+       app:layout_constraintHorizontal_bias="0.5"
+       app:layout_constraintStart_toStartOf="@id/guideline1"
+       app:layout_constraintEnd_toEndOf="@id/guideline2"
+       app:layout_constraintTop_toBottomOf="@id/space"
+       app:layout_constraintBottom_toTopOf="@id/space1"
+       android:background="@drawable/menu_bar"
+       android:elevation="4dp"
+       >
+       
+       <TextView
+           android:id="@+id/text_view_type"
+           android:layout_width="wrap_content"
+           android:layout_height="0dp"
+           app:layout_constraintHeight_default="percent"
+           app:layout_constraintHeight_percent="0.5"
+           android:textSize="18sp"
+           android:text="@string/exspense_string"
+           android:fontFamily="@font/inter_medium"
+           android:textColor="@color/grey"
+           app:layout_constraintVertical_bias="0.45"
+           app:layout_constraintStart_toStartOf="@id/panel"
+           app:layout_constraintEnd_toStartOf="@id/switch_type"
+           app:layout_constraintTop_toTopOf="@id/panel"
+           app:layout_constraintBottom_toBottomOf="@id/panel"
+           app:layout_constraintHorizontal_chainStyle="spread"/>
+       
+       <Switch
+           android:id="@+id/switch_type"
+           android:layout_width="wrap_content"
+           android:layout_height="0dp"
+           android:minHeight="41dp"
+           app:layout_constraintHeight_default="percent"
+           app:layout_constraintHeight_percent="0.5"
+           android:scaleX="1.6"
+           android:scaleY="1.6"
+           app:layout_constraintStart_toEndOf="@id/text_view_type"
+           app:layout_constraintEnd_toEndOf="@id/panel"
+           app:layout_constraintTop_toTopOf="@id/panel"
+           app:layout_constraintBottom_toBottomOf="@id/panel"
+           tools:ignore="UseSwitchCompatOrMaterialXml" />
+       
+   </androidx.constraintlayout.widget.ConstraintLayout>
+    
+<!--    <EditText-->
+<!--        android:id="@+id/edit_text_name"-->
+<!--        android:verticalScrollbarPosition="defaultPosition"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:textColorHighlight="@color/light_blue"-->
+<!--        android:textCursorDrawable="@drawable/cursor_light_blue"-->
+<!--        android:cursorVisible="false"-->
+<!--        app:layout_constraintWidth_max="488dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_default="percent"-->
+<!--        app:layout_constraintHeight_percent="0.09"-->
+<!--        android:hint="@string/name_string"-->
+<!--        android:textSize="18sp"-->
+<!--        android:fontFamily="@font/inter_medium"-->
+<!--        android:maxLines="1"-->
+<!--        android:ellipsize="end"-->
+<!--        android:autofillHints="none"-->
+<!--        android:inputType="text"-->
+<!--        android:maxLength="20"-->
+<!--        android:textColor="@color/grey"-->
+<!--        android:textAlignment="center"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="@id/guideline1"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/guideline2"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/space"-->
+<!--        android:background="@drawable/menu_bar"-->
+<!--        android:elevation="4dp"-->
+<!--        app:layout_constraintVertical_chainStyle="packed"-->
+<!--        app:layout_constraintVertical_bias="0.57"-->
+<!--         />-->
+
+
+    <Space
+        android:id="@+id/space1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintTop_toBottomOf="@id/panel"
+        app:layout_constraintBottom_toTopOf="@id/button_date"
+        />
+
+    <Button
+        android:id="@+id/button_date"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_max="488dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.09"
+        android:hint="@string/choose_date_string"
+        android:textSize="18sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/grey"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/space1"
+        app:layout_constraintBottom_toTopOf="@id/space2"
+        android:background="@drawable/menu_bar"
+        android:elevation="4dp"
+        android:listSelector="@android:color/transparent"
+        />
+
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintTop_toBottomOf="@id/button_date"
+        app:layout_constraintBottom_toTopOf="@id/button_category"
+        />
+
+    <Button
+        android:id="@+id/button_category"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_max="488dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.09"
+        android:hint="@string/choose_category_string"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textAlignment="center"
+        android:inputType="text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/space2"
+        app:layout_constraintBottom_toTopOf="@id/space3"
+        android:background="@drawable/menu_bar"
+        android:elevation="4dp"
+        android:autofillHints="none" />
+
+    <Space
+        android:id="@+id/space3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintTop_toBottomOf="@id/button_category"
+        app:layout_constraintBottom_toTopOf="@id/button_add"
+        />
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_max="320dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1"
+        android:text="@string/add_string"
+        android:textSize="17sp"
+        android:fontFamily="@font/inter_semi_bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/space3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/gradient_blue"
+        android:textColor="@color/white"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
