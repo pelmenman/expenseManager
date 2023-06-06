@@ -95,39 +95,6 @@
            tools:ignore="UseSwitchCompatOrMaterialXml" />
        
    </androidx.constraintlayout.widget.ConstraintLayout>
-    
-<!--    <EditText-->
-<!--        android:id="@+id/edit_text_name"-->
-<!--        android:verticalScrollbarPosition="defaultPosition"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:textColorHighlight="@color/light_blue"-->
-<!--        android:textCursorDrawable="@drawable/cursor_light_blue"-->
-<!--        android:cursorVisible="false"-->
-<!--        app:layout_constraintWidth_max="488dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintHeight_default="percent"-->
-<!--        app:layout_constraintHeight_percent="0.09"-->
-<!--        android:hint="@string/name_string"-->
-<!--        android:textSize="18sp"-->
-<!--        android:fontFamily="@font/inter_medium"-->
-<!--        android:maxLines="1"-->
-<!--        android:ellipsize="end"-->
-<!--        android:autofillHints="none"-->
-<!--        android:inputType="text"-->
-<!--        android:maxLength="20"-->
-<!--        android:textColor="@color/grey"-->
-<!--        android:textAlignment="center"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="@id/guideline1"-->
-<!--        app:layout_constraintEnd_toEndOf="@id/guideline2"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/space"-->
-<!--        android:background="@drawable/menu_bar"-->
-<!--        android:elevation="4dp"-->
-<!--        app:layout_constraintVertical_chainStyle="packed"-->
-<!--        app:layout_constraintVertical_bias="0.57"-->
-<!--         />-->
-
 
     <Space
         android:id="@+id/space1"
@@ -181,13 +148,13 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.09"
         android:hint="@string/choose_category_string"
+        android:inputType="text"
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/grey"
         android:textSize="18sp"
         android:maxLines="1"
         android:ellipsize="end"
         android:textAlignment="center"
-        android:inputType="text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
@@ -195,7 +162,8 @@
         app:layout_constraintBottom_toTopOf="@id/space3"
         android:background="@drawable/menu_bar"
         android:elevation="4dp"
-        android:autofillHints="none" />
+        android:autofillHints="none"
+        tools:ignore="TextViewEdits" />
 
     <Space
         android:id="@+id/space3"

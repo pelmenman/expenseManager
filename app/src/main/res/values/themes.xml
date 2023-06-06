@@ -14,6 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="colorControlActivated">@color/light_blue</item>
         <item name="android:datePickerDialogTheme">@style/whiteDatePickerDialogTheme</item>
+        <item name="android:alertDialogTheme">@style/roundedCornersAlertDiagramTheme</item>
     </style>
 
     <style name="whiteDatePickerDialogTheme" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
@@ -29,5 +30,10 @@
         <item name="android:colorControlActivated">@color/light_blue</item>
         <item name="dialogCornerRadius">30dp</item>
     </style>
+
+    <style name="roundedCornersAlertDiagramTheme" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="dialogCornerRadius">30dp</item>
+    </style>
+
 
 </resources>

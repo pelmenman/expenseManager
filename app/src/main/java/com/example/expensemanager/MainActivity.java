@@ -9,14 +9,14 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.example.expensemanager.databinding.ActivityMainBinding;
+import com.example.expensemanager.di.DatabaseComponent;
 import com.example.expensemanager.view.ListFragment;
 import com.example.expensemanager.view.MainFragment;
 import com.example.expensemanager.view.AddFragment;
 
-import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity {
-    //DatePickerDialog.OnDateSetListener setListener;
+
+    //DatabaseComponent component;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding  binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        //component = DaggerDatabaseComponent.create();
+
 
         ListFragment list_fragment = new ListFragment();
         MainFragment main_fragment = new MainFragment();

@@ -2,10 +2,10 @@ package com.example.expensemanager.view
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.expensemanager.R
 import com.example.expensemanager.databinding.FragmentAddBinding
-import com.example.expensemanager.model.Finance
 import com.example.expensemanager.viewModel.AddViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -23,37 +22,43 @@ import java.util.Locale
 class AddFragment : Fragment(R.layout.fragment_add) {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
-    private lateinit var observer : Observer<Finance>
+    private lateinit var observer : Observer<String>
     private lateinit var viewModel: AddViewModel
     private lateinit var calendar : Calendar
-    private lateinit var categoryDialogFragment: CategoryDialogFragment
+    private var expenses = arrayOf("Еда", "Транспорт", "Развлечения", "Одежда", "Дом", "Спорт", "Транспорт", "Другое")
+    private var incomes = arrayOf("Зарплата", "Аренда", "Аванс", "Другое")
+    private lateinit var categoryDialogFragmentBuilder : AlertDialog.Builder
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         calendar = Calendar.getInstance()
-        categoryDialogFragment = CategoryDialogFragment()
+        categoryDialogFragmentBuilder = AlertDialog.Builder(context)
+        changeItem(expenses, categoryDialogFragmentBuilder)
 
-        observer = Observer<Finance> {
-            Toast.makeText(activity, "Мы добавили!!!!", Toast.LENGTH_SHORT).show()
+        //val builder = AlertDialog.Builder(requireContext())
+        observer = Observer {
+            //Toast.makeText(activity, "Мы добавили!!!!", Toast.LENGTH_SHORT).show()
         }
 
-        viewModel = ViewModelProvider(this).get(AddViewModel :: class.java)
+        viewModel = ViewModelProvider(this)[AddViewModel :: class.java]
 
         binding.switchType.setOnClickListener {
             if (binding.switchType.isChecked) {
                 binding.textViewType.text = "Доход"
+                changeItem(incomes, categoryDialogFragmentBuilder)
             } else {
                 binding.textViewType.text = "Расход"
+                changeItem(expenses, categoryDialogFragmentBuilder)
             }
-
+            if(binding.buttonCategory.text.isNotEmpty()) binding.buttonCategory.text = ""
         }
 
-        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+        val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -69,16 +74,34 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         }
 
 
+        binding.buttonCategory.setOnClickListener {
+            categoryDialogFragmentBuilder.create().show()
+        }
+
+
         binding.buttonAdd.setOnClickListener{
-            Toast.makeText(activity, "Мы добавили!!!!", Toast.LENGTH_SHORT).show()
-//            viewModel.liveData.setData(binding.editTextName.text.toString(),
-//            binding.buttonCategory.text.toString(),
-//            binding.buttonCategory.text.toString(),
-//            binding.buttonDate.text.toString(),
-//            binding.editTextCost.text.toString().toDouble())
+            if(checkFieldsCorrect()) {
+                Toast.makeText(context, "Не все поля заполнены", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, binding.buttonCategory.text, Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
+    }
+
+    private fun checkFieldsCorrect(): Boolean {
+        //1. No cost
+        //2. No date
+        //3. No category
+        return (binding.editTextCost.text.isEmpty() || binding.buttonDate.text.isEmpty() || binding.buttonCategory.text.isEmpty())
+    }
+
+    private fun changeItem(itemsArray: Array<String>, categoryDialogFragmentBuilder: AlertDialog.Builder) {
+        categoryDialogFragmentBuilder.setItems(itemsArray, DialogInterface.OnClickListener { _, which ->
+            binding.buttonCategory.text = itemsArray[which]
+
+        })
     }
 
     private fun updateDate(calendar: Calendar) {
