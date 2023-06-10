@@ -13,12 +13,10 @@ import com.example.expensemanager.databinding.ActivityMainBinding;
 import com.example.expensemanager.view.ListFragment;
 import com.example.expensemanager.view.MainFragment;
 import com.example.expensemanager.view.AddFragment;
-import com.example.expensemanager.viewModel.ViewModel;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import dagger.hilt.android.HiltAndroidApp;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {

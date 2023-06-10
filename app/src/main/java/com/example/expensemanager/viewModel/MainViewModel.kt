@@ -8,23 +8,19 @@ import com.example.expensemanager.database.FinanceDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.Calendar
 import javax.inject.Inject
 
 
 @HiltViewModel
-class ViewModel @Inject constructor(val dao : FinanceDao): ViewModel() {
+class MainViewModel @Inject constructor(val dao : FinanceDao): ViewModel() {
     val liveData : LiveData<List<Finance>> = dao.getAll()
 
     fun insert(finance: Finance) {
         viewModelScope.launch(Dispatchers.IO) {
-            dao.insert(finance)
+            dao.insert(finance.type, finance.category, finance.date, finance.cost)
         }
     }
 
     fun getBudgetOf(monthYear : String): LiveData<String> = dao.getBudget(monthYear)
-
-    fun getBudgetOf(): LiveData<String> = dao.getBudget()
-
 
 }
