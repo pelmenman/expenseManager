@@ -76,12 +76,14 @@ class AddFragment @Inject constructor(val dao : FinanceDao) : Fragment(R.layout.
                 Toast.makeText(context, "Не все поля заполнены", Toast.LENGTH_SHORT).show()
             } else {
 
-                mainViewModel.insert(Finance(
-                    type = binding.textViewType.text.toString(),
-                    category = binding.buttonCategory.text.toString(),
-                    date = binding.buttonDate.text.toString(),
-                    cost = costType()
-                ))
+                mainViewModel.insert(
+                    Finance(0,
+                     binding.textViewType.text.toString(),
+                        binding.buttonCategory.text.toString(),
+                     binding.buttonDate.text.toString(),
+                     costType()
+                )
+                )
                 Toast.makeText(context, "Запись добавлена", Toast.LENGTH_SHORT).show()
                 cleanAll()
             }

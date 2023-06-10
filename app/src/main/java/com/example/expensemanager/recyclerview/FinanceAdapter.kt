@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expensemanager.R
 import com.example.expensemanager.database.Finance
-import com.example.expensemanager.databinding.NoteBinding
 
 class FinanceAdapter(
     private var financeItem: List<Finance>

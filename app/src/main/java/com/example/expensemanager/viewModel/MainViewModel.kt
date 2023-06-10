@@ -17,7 +17,7 @@ class MainViewModel @Inject constructor(val dao : FinanceDao): ViewModel() {
 
     fun insert(finance: Finance) {
         viewModelScope.launch(Dispatchers.IO) {
-            dao.insert(finance.type, finance.category, finance.date, finance.cost)
+            dao.insert(finance)
         }
     }
 

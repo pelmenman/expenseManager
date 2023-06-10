@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import com.example.expensemanager.database.FinanceDao;
 import com.example.expensemanager.databinding.ActivityMainBinding;
-import com.example.expensemanager.view.ListFragment;
+import com.example.expensemanager.view.SettingsFragment;
 import com.example.expensemanager.view.MainFragment;
 import com.example.expensemanager.view.AddFragment;
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding  binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ListFragment list_fragment = new ListFragment();
+        SettingsFragment list_fragment = new SettingsFragment();
         MainFragment main_fragment = new MainFragment(dao);
         AddFragment add_fragment = new AddFragment(dao);
 

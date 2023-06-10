@@ -17,14 +17,6 @@ object AppModule {
     @Singleton
     fun provideDatabase(@ApplicationContext app: Context) = Room.databaseBuilder(app, FinanceDatabase::class.java, "finance").build()
 
-//    @Provides
-//    @Singleton
-//    fun provideViewModel(fragment: Fragment) : ViewModel {
-//        val viewModel: ViewModel by fragment.viewModels()
-//
-//        return viewModel
-//    }
-
     @Provides
     @Singleton
     fun provideDao(db : FinanceDatabase) = db.getDao()
