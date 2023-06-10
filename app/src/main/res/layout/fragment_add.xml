@@ -23,7 +23,7 @@
         android:textColor="@color/grey"
         android:maxLines="1"
         android:ellipsize="end"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:maxLength="13"
         android:textAlignment="center"
         app:layout_constraintHorizontal_bias="0.5"

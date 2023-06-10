@@ -1,51 +1,52 @@
 package com.example.expensemanager.view
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.expensemanager.R
+import com.example.expensemanager.database.Finance
+import com.example.expensemanager.database.FinanceDao
 import com.example.expensemanager.databinding.FragmentAddBinding
-import com.example.expensemanager.viewModel.AddViewModel
+import com.example.expensemanager.viewModel.ViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
+import java.lang.Math.pow
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import javax.inject.Inject
+import kotlin.math.abs
+import kotlin.math.absoluteValue
+import kotlin.math.pow
 
 
-class AddFragment : Fragment(R.layout.fragment_add) {
-    private var _binding: FragmentAddBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var observer : Observer<String>
-    private lateinit var viewModel: AddViewModel
+@AndroidEntryPoint
+class AddFragment @Inject constructor(val dao : FinanceDao) : Fragment(R.layout.fragment_add) {
+    private lateinit var binding: FragmentAddBinding
+    private val viewModel: ViewModel by viewModels()
     private lateinit var calendar : Calendar
     private var expenses = arrayOf("Еда", "Транспорт", "Развлечения", "Одежда", "Дом", "Спорт", "Транспорт", "Другое")
     private var incomes = arrayOf("Зарплата", "Аренда", "Аванс", "Другое")
     private lateinit var categoryDialogFragmentBuilder : AlertDialog.Builder
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddBinding.inflate(inflater, container, false)
+        binding = FragmentAddBinding.inflate(inflater, container, false)
         calendar = Calendar.getInstance()
         categoryDialogFragmentBuilder = AlertDialog.Builder(context)
         changeItem(expenses, categoryDialogFragmentBuilder)
-
-        //val builder = AlertDialog.Builder(requireContext())
-        observer = Observer {
-            //Toast.makeText(activity, "Мы добавили!!!!", Toast.LENGTH_SHORT).show()
-        }
-
-        viewModel = ViewModelProvider(this)[AddViewModel :: class.java]
 
         binding.switchType.setOnClickListener {
             if (binding.switchType.isChecked) {
@@ -78,16 +79,44 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             categoryDialogFragmentBuilder.create().show()
         }
 
-
         binding.buttonAdd.setOnClickListener{
             if(checkFieldsCorrect()) {
                 Toast.makeText(context, "Не все поля заполнены", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, binding.buttonCategory.text, Toast.LENGTH_SHORT).show()
+
+                viewModel.insert(Finance(
+                    null,
+                    binding.textViewType.text.toString(),
+                    binding.buttonCategory.text.toString(),
+                    binding.buttonDate.text.toString(),
+                    costType()
+                ))
+                Toast.makeText(context, "Запись добавлена", Toast.LENGTH_SHORT).show()
+                cleanAll()
             }
         }
 
         return binding.root
+    }
+
+    private fun costType(): Double {
+        val result : Double
+
+        if(binding.switchType.isChecked) {
+            result = abs(binding.editTextCost.text.toString().toDouble())
+        } else {
+            result = -1 * binding.editTextCost.text.toString().toDouble()
+        }
+
+        return result
+    }
+
+    private fun cleanAll() {
+        binding.editTextCost.text.clear()
+        binding.textViewType.text = "Расход"
+        binding.switchType.isChecked = false
+        binding.buttonDate.text = ""
+        binding.buttonCategory.text = ""
     }
 
     private fun checkFieldsCorrect(): Boolean {
@@ -98,31 +127,14 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     }
 
     private fun changeItem(itemsArray: Array<String>, categoryDialogFragmentBuilder: AlertDialog.Builder) {
-        categoryDialogFragmentBuilder.setItems(itemsArray, DialogInterface.OnClickListener { _, which ->
-            binding.buttonCategory.text = itemsArray[which]
-
-        })
+        categoryDialogFragmentBuilder.setItems(itemsArray) { _, which -> binding.buttonCategory.text = itemsArray[which]
+        }
     }
 
     private fun updateDate(calendar: Calendar) {
         val format = "dd.MM.yyyy"
         val sdf = SimpleDateFormat(format, Locale.UK)
         binding.buttonDate.text = sdf.format(calendar.time)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.liveData.observe(this, observer)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.liveData.removeObserver(observer)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

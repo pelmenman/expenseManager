@@ -8,15 +8,22 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import com.example.expensemanager.database.FinanceDao;
 import com.example.expensemanager.databinding.ActivityMainBinding;
-import com.example.expensemanager.di.DatabaseComponent;
 import com.example.expensemanager.view.ListFragment;
 import com.example.expensemanager.view.MainFragment;
 import com.example.expensemanager.view.AddFragment;
+import com.example.expensemanager.viewModel.ViewModel;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+import dagger.hilt.android.HiltAndroidApp;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-
-    //DatabaseComponent component;
+    @Inject
+    FinanceDao dao;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -25,27 +32,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding  binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //component = DaggerDatabaseComponent.create();
-
 
         ListFragment list_fragment = new ListFragment();
-        MainFragment main_fragment = new MainFragment();
-        AddFragment add_fragment = new AddFragment();
+        MainFragment main_fragment = new MainFragment(dao);
+        AddFragment add_fragment = new AddFragment(dao);
 
         setCurrentFragment(main_fragment);
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.menu_bar_add -> {
+                case R.id.menu_bar_add: {
                     findViewById(R.id.menu_bar_add).setSelected(true);
                     setCurrentFragment(add_fragment);
                     return true;
                 }
-                case R.id.menu_bar_list -> {
+                case R.id.menu_bar_list: {
                     findViewById(R.id.menu_bar_list).setSelected(true);
                     setCurrentFragment(list_fragment);
                     return true;
                 }
-                case R.id.menu_bar_main -> {
+                case R.id.menu_bar_main : {
                     findViewById(R.id.menu_bar_main).setSelected(true);
                     setCurrentFragment(main_fragment);
                     return true;
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
     }
+
 
     private void setCurrentFragment(Fragment fragment) {
         FragmentTransaction s = getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragment);

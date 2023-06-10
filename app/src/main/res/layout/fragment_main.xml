@@ -6,73 +6,126 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <TextView
+        android:id="@+id/text_view_month_year"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5"
+        android:layout_height="0dp"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:fontFamily="@font/inter_medium"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_widget"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/date_bar"
+        />
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mainWidget"
+        android:id="@+id/main_widget"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/gradient_blue"
 
         android:elevation="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/list_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.25"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.20"
-        app:layout_constraintWidth_percent="0.87">
-
+        app:layout_constraintTop_toBottomOf="@id/text_view_month_year"
+        app:layout_constraintWidth_percent="0.87"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
             android:id="@+id/budget"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.8"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_semi_bold"
             android:text="Бюджет"
             android:textColor="@color/white"
             android:textSize="32sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8"
-            app:layout_constraintVertical_chainStyle="spread" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@id/space"
+            app:layout_constraintVertical_chainStyle="packed"
+            />
+
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.08"
+            app:layout_constraintTop_toBottomOf="@id/budget"
+            app:layout_constraintBottom_toTopOf="@id/edit_text_sum"
+            />
+
 
         <TextView
-            android:id="@+id/sum"
-            android:layout_width="168dp"
+            android:id="@+id/edit_text_sum"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.8"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/budget"
             android:layout_alignParentStart="true"
 
             android:fontFamily="@font/inter_medium"
-            android:text="18 000"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.11" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.49775785" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/space"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.5" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/list_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintWidth_percent="0.85"
+        android:background="@drawable/menu_bar"
+        android:elevation="4dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_widget"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
